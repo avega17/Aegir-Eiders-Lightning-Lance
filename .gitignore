@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+
+# Environments
+.venv/
+.env
+.env.*
+
+# OS / IDE
+.DS_Store
+.vscode/
+
+# Notebooks / Experiments
+.ipynb_checkpoints/
+wandb/
+
+# Caches
+.cache/
+.cache/**
+.cache/huggingface/
+
+# Local data
+data/lancedb/
+
+# Augment files
+.augment/
+
