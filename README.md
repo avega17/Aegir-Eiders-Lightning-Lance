@@ -1,13 +1,21 @@
 # Ægir Eider’s Lightning Lance
 
-A geospatial computer-vision data engineering project focused on building a robust, reproducible data flywheel for PV segmentation: seed labels → Mask Factory (prompt‑driven VHR mask generation) → multispectral (MSI) sourcing and preprocessing → training → large‑scale inference → validation → backfill to improve the dataset. This repository emphasizes modern data stack patterns and LanceDB‑based operational storage for ML workloads.
+A geospatial computer-vision data engineering project focused on building a robust, reproducible data flywheel for PV segmentation:  
 
-## Why this repo
-- Data‑centric thesis work: prioritize high‑quality, multi‑modal data generation, storage, and retrieval
-- Operational datastore: LanceDB/Lance columnar format for training/inference data
-- Composable pipelines: Apache Hamilton dataflows (function‑as‑node)
-- Training scaffolds: PyTorch Lightning with Weights & Biases (W&B) experiment tracking
-- Alignment with Ice‑mELT DuckLake: DuckLake (DuckDB+Postgres catalog) remains the system of record; this repo focuses on CV workflows and writes results back
+source labels from [our Lakehouse project](https://github.com/avega17/Ice-mELT_DuckLake) → Mask Factory for Solar Panel Labels (prompt‑driven segmentation mask generation) → multispectral imagery (MSI) sourcing and preprocessing → generate training dataset for variety of segmentation models → large‑scale regional or national inference  → validation of results using Spectral Indices and Scene Classification → backfill to augment the dataset. 
+
+This repository emphasizes [modern data stack patterns](https://github.com/avega17/Ice-mELT_DuckLake/blob/main/docs/modern_data_stack.md) and [LanceDB‑based operational storage]() for ML workloads.
+
+## What's in a Name?
+
+The repo's name is a nod to its technical stack and conceptual origins:
+
+- Ægir: In Norse Mythology, Ægir is a Jǫtunn of the sea and a personification of it's power. In our context, it represents the vast "data lake" of geospatial datasets we need to navigate and process.
+- Eider: A large sea duck from northern latitudes with a peculiar, vocal cooing call [that sounds quite humorous](https://www.allaboutbirds.org/guide/Common_Eider/sounds). This continues the "duck" theme from our foundational DuckDB/DuckLake architecture and the polar/ice theme of the precursor Ice-mELT project.
+- Lightning: A direct reference to [PyTorch Lightning](https://lightning.ai/docs/pytorch/stable/), the framework we've chosen to enable fast, reproducible, and scalable training of our computer vision models. 
+- Lance: For the [Lance columnar file format](https://blog.lancedb.com/lance-v2/) and [LanceDB](https://lancedb.github.io/lancedb/faq/#what-is-the-difference-between-lance-and-lancedb), the high-performance operational datastore that is purpose-built for the "last mile" of ML training and inference workloads, solving critical I/O bottlenecks.
+
+
 
 ## Architecture overview
 - Data foundation
