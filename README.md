@@ -2,28 +2,24 @@
 
 A geospatial computer-vision data engineering project focused on building a robust, reproducible data flywheel for PV segmentation:  
 
-source labels from [our Lakehouse project](https://github.com/avega17/Ice-mELT_DuckLake) → Mask Factory for Solar Panel Labels (prompt‑driven segmentation mask generation) → multispectral imagery (MSI) sourcing and preprocessing → generate training dataset for variety of segmentation models → large‑scale regional or national inference  → validation of results using Spectral Indices and Scene Classification → backfill to augment the dataset. 
+Surce labels and other geospatial context from [our Lakehouse project](https://github.com/avega17/Ice-mELT_DuckLake) → Mask Factory for Solar Panel Labels (prompt‑driven segmentation mask generation) → multispectral imagery (MSI) sourcing and preprocessing → generate training dataset for variety of segmentation models → large‑scale regional or national inference  → validation of results using Spectral Indices and Scene Classification → backfill to augment the dataset. 
 
-This repository emphasizes [modern data stack patterns](https://github.com/avega17/Ice-mELT_DuckLake/blob/main/docs/modern_data_stack.md) and [LanceDB‑based operational storage]() for ML workloads.
+This repository emphasizes [modern data stack patterns](https://github.com/avega17/Ice-mELT_DuckLake/blob/main/docs/modern_data_stack.md) and [Lance columnar storage](https://arxiv.org/html/2504.15247v1) for ML workloads.
 
 ## What's in a Name?
-
-The repo's name is a nod to its technical stack and conceptual origins:
 
 - Ægir: In Norse Mythology, Ægir is a Jǫtunn of the sea and a personification of it's power. In our context, it represents the vast "data lake" of geospatial datasets we need to navigate and process.
 - Eider: A large sea duck from northern latitudes with a peculiar, vocal cooing call [that sounds quite humorous](https://www.allaboutbirds.org/guide/Common_Eider/sounds). This continues the "duck" theme from our foundational DuckDB/DuckLake architecture and the polar/ice theme of the precursor Ice-mELT project.
 - Lightning: A direct reference to [PyTorch Lightning](https://lightning.ai/docs/pytorch/stable/), the framework we've chosen to enable fast, reproducible, and scalable training of our computer vision models. 
-- Lance: For the [Lance columnar file format](https://blog.lancedb.com/lance-v2/) and [LanceDB](https://lancedb.github.io/lancedb/faq/#what-is-the-difference-between-lance-and-lancedb), the high-performance operational datastore that is purpose-built for the "last mile" of ML training and inference workloads, solving critical I/O bottlenecks.
-
-
+- Lance: For the [Lance columnar file format](https://blog.lancedb.com/lance-v2/) and [LanceDB](https://lancedb.github.io/lancedb/faq/#what-is-the-difference-between-lance-and-lancedb), the high-performance operational datastore that is purpose-built for the "last mile" of ML training and inference workloads, alleviating I/O bottlenecks.
 
 ## Architecture overview
 - Data foundation
   - LanceDB at ./data/lancedb (local default)
-  - Tables (initial): training_data (uuid, prompt_geometry, vhr_image_chip, generated_mask, msi_image_chip, metadata)
+  - Tables (initial proposal): training_data (uuid, prompt_geometry, vhr_image_chip, generated_mask, msi_image_chip, metadata)
   - Metadata‑first filtering (S2/H3 level IDs, date ranges, sensor props)
 - Core modules
-  - Hamilton dataflows (structure‑only initially):
+  - Hamilton dataflows (initial proposal):
     - ingest_ducklake_labels: read prompts/labels from DuckLake (DuckDB ATTACH) and prepare for Lance
     - sam_mask_factory: prompt‑driven mask generation & refinement (segment‑geospatial: SAM/SAM‑HQ/SAM2)
     - vhr_core_five_loader: VHR/HR imagery via HF datasets + xarray (Core‑Five)
@@ -48,7 +44,7 @@ The repo's name is a nod to its technical stack and conceptual origins:
 
 3) Local data locations
 - LanceDB root (default): `./data/lancedb`
-- DuckLake access: Use DuckDB ATTACH to the DuckLake catalog (dev/prod commands from Ice‑mELT). Initial development is local only; keep Dev→Prod parity principles.
+- DuckLake access: Use DuckDB ATTACH to the DuckLake catalog (dev/prod commands from Ice‑mELT). Initial development is local only; keep Dev→Prod code parity principles.
 
 ## Project layout
 ```
@@ -116,6 +112,3 @@ Hamilton modules follow the function‑as‑node pattern. We will run dataflows 
 - LanceDB Python: https://lancedb.github.io/lancedb/python/python/
 - S2 indexing: https://github.com/aaliddell/s2cell
 - Arrow/Geo: PyArrow docs; consider arro3 later: https://github.com/kylebarron/arro3
-
-## Dev → Prod parity
-This repo follows the same philosophy as Ice‑mELT DuckLake: keep configuration/environment patterns compatible for future Neon/MotherDuck/R2 setup. Early development stays local.
