@@ -2,14 +2,14 @@
 
 A geospatial computer-vision data engineering project focused on building a robust, reproducible data flywheel for PV segmentation:  
 
-Surce labels and other geospatial context from [our Lakehouse project](https://github.com/avega17/Ice-mELT_DuckLake) → Mask Factory for Solar Panel Labels (prompt‑driven segmentation mask generation) → multispectral imagery (MSI) sourcing and preprocessing → generate training dataset for variety of segmentation models → large‑scale regional or national inference  → validation of results using Spectral Indices and Scene Classification → backfill to augment the dataset. 
+Surce labels and other geospatial context from [our Lakehouse project](https://github.com/avega17/Ice-mELT_DuckLake) → multispectral imagery (MSI) sourcing and preprocessing → Mask Factory for Solar Panel Labels (prompt‑driven segmentation mask generation) →  generate training dataset for variety of segmentation models → large‑scale regional or national inference + grid search via spatial index and other spatial context  → validation of results using Spectral Indices and Scene Classification → backfill to augment the dataset with more precise segmentation masks.
 
 This repository emphasizes [modern data stack patterns](https://github.com/avega17/Ice-mELT_DuckLake/blob/main/docs/modern_data_stack.md) and [Lance columnar storage](https://arxiv.org/html/2504.15247v1) for ML workloads.
 
 ## What's in a Name?
 
-- Ægir: In Norse Mythology, Ægir is a Jǫtunn of the sea and a personification of it's power. In our context, it represents the vast "data lake" of geospatial datasets we need to navigate and process.
-- Eider: A large sea duck from northern latitudes with a peculiar, vocal cooing call [that sounds quite humorous](https://www.allaboutbirds.org/guide/Common_Eider/sounds). This continues the "duck" theme from our foundational DuckDB/DuckLake architecture and the polar/ice theme of the precursor Ice-mELT project.
+- Ægir: In Norse Mythology, [Ægir](https://pantheon.org/articles/a/aegir.html) is a Jǫtunn of the sea and a personification of it's power. In our context, it represents the vast "data lake" of geospatial datasets we need to navigate and process.
+- Eider: the [Eider](https://www.allaboutbirds.org/guide/Common_Eider/overview) is a large sea duck of the cold northern latitudes known for their peculiar, vocal cooing call [that sounds quite humorous](https://www.allaboutbirds.org/guide/Common_Eider/sounds) and for their [deep dives up to 20m](https://medium.com/usfws/what-the-duck-7-things-you-dont-know-about-the-common-eider-e952e970d716) where they swallow their meals in one gulp. This continues the "duck" and polar/ice theme of the precursor [Ice-mELT_DuckLake repo](https://github.com/avega17/Ice-mELT_DuckLake).
 - Lightning: A direct reference to [PyTorch Lightning](https://lightning.ai/docs/pytorch/stable/), the framework we've chosen to enable fast, reproducible, and scalable training of our computer vision models. 
 - Lance: For the [Lance columnar file format](https://blog.lancedb.com/lance-v2/) and [LanceDB](https://lancedb.github.io/lancedb/faq/#what-is-the-difference-between-lance-and-lancedb), the high-performance operational datastore that is purpose-built for the "last mile" of ML training and inference workloads, alleviating I/O bottlenecks.
 
@@ -34,7 +34,7 @@ This repository emphasizes [modern data stack patterns](https://github.com/avega
 1) Python & uv
 - Install uv (https://docs.astral.sh/uv/): `curl -LsSf https://astral.sh/uv/install.sh | sh`
 - Create environment + install deps from requirements.txt:
-  - `uv venv -p 3.11`
+  - `uv venv -p 3.12`
   - `source .venv/bin/activate`
   - `uv pip install -r requirements.txt`
 
