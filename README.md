@@ -1,8 +1,8 @@
 # Ægir Eider’s Lightning Lance
 
-A geospatial computer-vision data engineering project focused on building a robust, reproducible data flywheel for PV segmentation:  
+A geospatial computer-vision data engineering project focused on building a robust, reproducible data flywheel for PV Solar Panel detection and segmentation of sub-meter GSD EO imagery:
 
-Surce labels and other geospatial context from [our Lakehouse project](https://github.com/avega17/Ice-mELT_DuckLake) → multispectral imagery (MSI) sourcing and preprocessing → Mask Factory for Solar Panel Labels (prompt‑driven segmentation mask generation) →  generate training dataset for variety of segmentation models → large‑scale regional or national inference + grid search via spatial index and other spatial context  → validation of results using Spectral Indices and Scene Classification → backfill to augment the dataset with more precise segmentation masks.
+Source labels and other geospatial context from [our Lakehouse project](https://github.com/avega17/Ice-mELT_DuckLake) → multispectral imagery (MSI) sourcing and preprocessing → Mask Factory for Solar Panel Labels (prompt‑driven segmentation mask generation) →  generate training dataset for variety of segmentation models → large‑scale regional or national inference + grid search via spatial index and other spatial context  → validation of results using Spectral Indices and Scene Classification → backfill to augment the dataset with more precise segmentation masks.
 
 This repository emphasizes [modern data stack patterns](https://github.com/avega17/Ice-mELT_DuckLake/blob/main/docs/modern_data_stack.md) and [Lance columnar storage](https://arxiv.org/html/2504.15247v1) for ML workloads.
 
